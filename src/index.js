@@ -33,6 +33,7 @@ function spice_error(e)
 function connect(password)
 {
     var host, port, scheme = "ws://", uri;
+    console.log('connecting');
 
     // By default, use the host and port of server that served this file
     host = spice_query_var('host', window.location.hostname);
@@ -64,7 +65,7 @@ function connect(password)
     if (password === undefined) {
         password = spice_query_var('password', '');
     }
-    var path = spice_query_var('path', 'websockify');
+    var path = spice_query_var('path', null);
 
     if ((!host) || (!port)) {
         console.log("must specify host and port in URL");
@@ -75,16 +76,17 @@ function connect(password)
         sc.stop();
     }
 
-    uri = scheme + host + ":" + port;
+    uri = scheme + host + ":" + port + '?host=' + host + '&token=' + token;
 
     if (path) {
       uri += path[0] == '/' ? path : ('/' + path);
     }
+    console.log('uri: ' + uri);
 
     try
     {
         sc = new SpiceHtml5.SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div",
-                    message_id: "message-div", password: password, onerror: spice_error, onagent: agent_connected });
+                    message_id: null, password: password, onerror: spice_error, onagent: agent_connected });
     }
     catch (e)
     {
@@ -145,5 +147,31 @@ window.addEventListener('spice-port-event', function(event) {
 });
 */
 
-//connect(undefined);
-//document.getElementById('sendCtrlAltDel').addEventListener('click', function(){ SpiceHtml5.sendCtrlAltDel(sc); });
+function show_debug_Logs() {
+    var content = document.getElementById('message-div')
+    if (content.style.display === 'block') {
+        content.style.display = 'none';
+    } else {
+        content.style.display = 'block';
+    }
+}
+
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen(); 
+      }
+    }
+}
+
+
+
+document.getElementById('sendCtrlAltDel').addEventListener('click', function(){ SpiceHtml5.sendCtrlAltDel(sc); });
+document.getElementById('debugLogs').addEventListener('click', function() { show_debug_Logs(); });
+document.getElementById('disconnect-button').addEventListener('click', function() { disconnect(); } );
+document.getElementById('fullscreen-toggle').addEventListener('click', function() { toggleFullscreen(); } );
+
+
+connect(undefined);
