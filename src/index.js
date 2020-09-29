@@ -111,6 +111,7 @@ function disconnect()
         document.getElementById('spice-area').removeEventListener('dragover', SpiceHtml5.handle_file_dragover, false);
         document.getElementById('spice-area').removeEventListener('drop', SpiceHtml5.handle_file_drop, false);
     }
+    sc = null;
     console.log("<< disconnect");
 }
 
@@ -166,11 +167,19 @@ function toggleFullscreen() {
     }
 }
 
+function toggleConnection() {
+    if(sc) {
+        disconnect();
+    } else {
+        connect(undefined)
+    }
+}
 
 
-document.getElementById('sendCtrlAltDel').addEventListener('click', function(){ SpiceHtml5.sendCtrlAltDel(sc); });
-document.getElementById('debugLogs').addEventListener('click', function() { show_debug_Logs(); });
-document.getElementById('disconnect-button').addEventListener('click', function() { disconnect(); } );
+
+//document.getElementById('sendCtrlAltDel').addEventListener('click', function(){ SpiceHtml5.sendCtrlAltDel(sc); });
+//document.getElementById('debugLogs').addEventListener('click', function() { show_debug_Logs(); });
+document.getElementById('connect-toggle').addEventListener('click', function() { toggleConnection(); } );
 document.getElementById('fullscreen-toggle').addEventListener('click', function() { toggleFullscreen(); } );
 
 

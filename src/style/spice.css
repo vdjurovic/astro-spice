@@ -158,3 +158,41 @@ canvas
 /*
  * Astro CSS
  */
+
+
+ #mySidenav a {
+    position: absolute;
+    left: -110px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 100px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    z-index: 5;
+  }
+  
+  #mySidenav a:hover {
+    left: 0;
+  }
+  
+  #connect-toggle {
+    top: 20px;
+    background-color: #4CAF50;
+  }
+  
+  #fullscreen-toggle {
+    top: 80px;
+    background-color: #2196F3;
+  }
+  
+  /* #projects {
+    top: 140px;
+    background-color: #f44336;
+  }
+  
+  #contact {
+    top: 200px;
+    background-color: #555
+  } */

@@ -33,34 +33,13 @@
     <body>
 
         
-
-        <div id="Sidenav" class="SidenavClosed" onmouseover="open_nav();" onmouseout="close_nav();">
-            <p class="closebtn" onclick="close_nav()">&#10006;</p>
-            <button id="sendCtrlAltDel">Send Ctrl-Alt-Delete</button>
-            <button id="debugLogs">Toggle Debug Logs</button>
-            <button id="disconnect-button">Disconect</button>
-            <button id="fullscreen-toggle">Fullscreen</button>
-            <!-- <div id="message-div" class="spice-message" style="display: none;"></div> -->
-
-            <div id="debug-div">
-            <!-- If DUMPXXX is turned on, dumped images will go here -->
-            </div>
-        </div>
+        <div id="mySidenav" >
+            <a href="#" id="connect-toggle">Conect</a>
+            <a href="#" id="fullscreen-toggle">Toggle Fullscreen</a>
+          </div> 
 
         <div id="spice-area">
             <div id="spice-screen" class="spice-screen"></div>
         </div>
-
-        <script>
-           
-           function open_nav() {
-                document.getElementById('Sidenav').className = 'SidenavOpen';
-            }
-
-            function close_nav() {
-                document.getElementById('Sidenav').className = 'SidenavClosed';
-            }
-           
-        </script>
     </body>
 </html>
