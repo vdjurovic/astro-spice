@@ -39,7 +39,7 @@ function resize_helper(sc)
          at the bottom, and use the position of the message window
          to figure out how to resize */
 
-    var h = window.innerHeight - 20;
+    var h = window.innerHeight;
 
     /* Screen height based on debug console visibility  */
     if (m != null)

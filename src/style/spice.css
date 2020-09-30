@@ -1,3 +1,5 @@
+
+
 body
 {
     background-color: #999999;
@@ -7,6 +9,7 @@ body
     font-family: "Lucida Grande", "Lucida Sans Unicode", "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
     font-size: 12pt;
     line-height: 1.5em;
+    height: 100vh;
 }
 
 * { margin: 0; }
@@ -45,7 +48,7 @@ button:active
 .SidenavClosed
 {
     height: 100%;
-    width: 0;
+    width: 2px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -109,26 +112,11 @@ canvas
     border: 1px solid #000000;
 }
 
-#login
-{
-    background: #bbbbbb;
-    z-index: 1;
-    padding-top: 2px;
-    border-bottom: 2px solid #00000040;
-}
-#login p
-{
-    margin-left: 27%;
-    display: inline;
-    font-size: large;
-}
-
 #spice-area
 {
     height: 100%;
     width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
 }
 .spice-screen
 {
@@ -166,3 +154,46 @@ canvas
 .spice-message-error {
     color: red;
 }
+
+/*
+ * Astro CSS
+ */
+
+
+ #mySidenav a {
+    position: absolute;
+    left: -70px;
+    transition: 0.3s;
+    padding: 15px;
+    width: 60px;
+    text-decoration: none;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    border-radius: 0 5px 5px 0;
+    z-index: 5;
+  }
+  
+  #mySidenav a:hover {
+    left: 0;
+  }
+  
+  #connect-toggle {
+    top: 20px;
+    background-color: #4CAF50;
+  }
+  
+  #fullscreen-toggle {
+    top: 80px;
+    background-color: #2196F3;
+  }
+  
+  /* #projects {
+    top: 140px;
+    background-color: #f44336;
+  }
+  
+  #contact {
+    top: 200px;
+    background-color: #555
+  } */
