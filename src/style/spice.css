@@ -162,13 +162,14 @@ canvas
 
  #mySidenav a {
     position: absolute;
-    left: -110px;
+    left: -70px;
     transition: 0.3s;
     padding: 15px;
-    width: 100px;
+    width: 60px;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 30px;
     color: white;
+    text-align: center;
     border-radius: 0 5px 5px 0;
     z-index: 5;
   }

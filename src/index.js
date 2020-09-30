@@ -1,6 +1,18 @@
 import './style/spice.css'
 
 import * as SpiceHtml5 from './spice/main.js';
+import { library, dom } from "@fortawesome/fontawesome-svg-core";
+import { faLink } from "@fortawesome/free-solid-svg-icons/faLink";
+import { faUnlink } from "@fortawesome/free-solid-svg-icons/faUnlink";
+import { faExpandArrowsAlt } from "@fortawesome/free-solid-svg-icons/faExpandArrowsAlt";
+import { faCompressArrowsAlt } from "@fortawesome/free-solid-svg-icons/faCompressArrowsAlt";
+
+
+library.add(faLink);
+library.add(faUnlink);
+library.add(faExpandArrowsAlt)
+library.add(faCompressArrowsAlt)
+dom.watch();
 
 var host = null, port = null;
 var sc;
@@ -87,6 +99,10 @@ function connect(password)
     {
         sc = new SpiceHtml5.SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div",
                     message_id: null, password: password, onerror: spice_error, onagent: agent_connected });
+        var node = document.getElementById('connect-toggle').childNodes[0];
+        node.classList.remove('fa-link');
+        node.classList.add('fa-unlink');
+        node.title = "Disconnect";
     }
     catch (e)
     {
@@ -112,6 +128,10 @@ function disconnect()
         document.getElementById('spice-area').removeEventListener('drop', SpiceHtml5.handle_file_drop, false);
     }
     sc = null;
+    var node = document.getElementById('connect-toggle').childNodes[0];
+    node.classList.remove('fa-unlink');
+    node.classList.add('fa-link');
+    node.title = "Connect";
     console.log("<< disconnect");
 }
 
@@ -158,11 +178,18 @@ function show_debug_Logs() {
 }
 
 function toggleFullscreen() {
+    var node = document.getElementById('fullscreen-toggle').childNodes[0];
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
+        node.classList.remove('fa-expand-arrows-alt');
+        node.classList.add('fa-compress-arrows-alt');
+        node.title = "Exit Fullscreen";
     } else {
       if (document.exitFullscreen) {
         document.exitFullscreen(); 
+        node.classList.remove('fa-compress-arrows-alt');
+        node.classList.add('fa-expand-arrows-alt');
+        node.title = "Fullscreen";
       }
     }
 }
