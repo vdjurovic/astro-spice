@@ -77,8 +77,6 @@ function connect(password)
 
     if (password === undefined) {
         password = spice_query_var('password', '');
-        password = atob(password)
-        console.log("decoded password: " + password)
     }
     var path = spice_query_var('path', null);
 
@@ -103,9 +101,8 @@ function connect(password)
         // show loader
         var loader = document.getElementById('loader-container');
         loader.style.display = 'flex';
-        // console.log("before connect");
         sc = new SpiceHtml5.SpiceMainConn({uri: uri, screen_id: "spice-screen", dump_id: "debug-div",
-                    message_id: null, password: password, onerror: spice_error, onagent: agent_connected });
+                    message_id: null, password: password, onerror: spice_error, onagent: agent_connected, onsuccess: success });
         var node = document.getElementById('connect-toggle').childNodes[0];
         node.classList.remove('fa-link');
         node.classList.add('fa-unlink');
@@ -150,6 +147,9 @@ function disconnect()
     screen.style.display = 'none';
     var splash = document.getElementById('splash');
     splash.style.display = 'flex';
+    // hide spinner
+    var loader = document.getElementById('loader-container');
+    loader.style.display = 'none';
 }
 
 function agent_connected(sc)
@@ -172,6 +172,12 @@ function agent_connected(sc)
         console.log("File API is not supported");
     }
     console.log("agent connected");
+    var loader = document.getElementById('loader-container');
+    loader.style.display = 'none';
+}
+
+function success() {
+    console.log("On success");
     var loader = document.getElementById('loader-container');
     loader.style.display = 'none';
 }
@@ -229,6 +235,5 @@ function toggleConnection() {
 //document.getElementById('debugLogs').addEventListener('click', function() { show_debug_Logs(); });
 document.getElementById('connect-toggle').addEventListener('click', function() { toggleConnection(); } );
 document.getElementById('fullscreen-toggle').addEventListener('click', function() { toggleFullscreen(); } );
-
 
 connect(undefined);
